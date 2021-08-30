@@ -5,10 +5,16 @@ import { Container, AppBar, Typography, Grow, Grid } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import memories from './images/memories.png';
 
+import { getPosts } from './actions/posts';
+
 const App = () => {
     const [currentId, setCurrentId] = useState(0);
     const dispatch = useDispatch();
     const classes = useStyles();
+
+    useEffect(() => {
+        dispatch(getPosts());
+    }, [currentId, dispatch]);
   return (
     <Container maxWidth="lg">
         <AppBar className={classes.appBar} position="static" color="inherit">
@@ -27,6 +33,6 @@ const App = () => {
         </Grow>
     </Container>
   );
-}
+};
 
 export default App;
