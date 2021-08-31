@@ -13,7 +13,8 @@ const Form = ({currentId, setCurrentId}) => {
   const handleSubmit = async(e) => {
     e.preventDefault();
     console.log(e);
-  }
+  };
+  
   return (
     <Paper className={classes.Paper}>
       <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
