@@ -16,13 +16,20 @@ const Form = ({currentId, setCurrentId}) => {
     if (post) setPostData(post);
   }, [post]);
 
+  const clear = () => {
+    setCurrentId(0);
+    setPostData({creator: '', title: '', message: '', tags: '', selectedFile: ''});
+  };
+
   const handleSubmit = async(e) => {
     e.preventDefault();
 
     if (currentId === 0) {
       dispatch(createPost(postData));
+      clear();
     } else {
       dispatch(updatePost(currentId, postData));
+      clear();
     }
   };
 
@@ -36,6 +43,7 @@ const Form = ({currentId, setCurrentId}) => {
         <TextField name="tags" variant="outlined" label="Tags (coma separated)" fullWidth value={postData.tags} onChange={(e) => setPostData({...postData, tags: e.target.value.split(',')})}  />
         <div className={classes.fileInput}><FileBase type="file" multiple={false} onDone={({ base64 }) => setPostData({ ...postData, selectedFile: base64 })}/></div>
         <Button className={classes.buttonSubmit} variant="contained" color="primary" size="large" type="submit" fullWidth>Submit</Button>
+        <Button className={classes.buttonSubmit} variant="contained" color="secondary" size="small" onClick={clear} fullWidth>Clear</Button>
       </form>
     </Paper>
   );
